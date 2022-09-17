@@ -15,9 +15,9 @@ async function dbConnect() {
     try{
        //Connect to our cluster. Next line returns a promise. We use await to stop further excecution until this is completed
         await client.connect()
-        .then(db=client);
-
-        await listDocuments(client); 
+        db=client;
+        console.log(`connected!${db.db().collection('contacts')}`)
+        // await listDocuments(client); 
     } catch (e) {
         console.error(e);
     }
@@ -29,7 +29,8 @@ async function dbConnect() {
 
 }
 
-const getDb = () => {
+async function getDb () {
+    await dbConnect()
     if (!db) {
       throw Error('Db not initialized');
     }
@@ -49,6 +50,10 @@ async function listDocuments(client){
     console.log("Documents:");
     console.log(databaseCSE341);    
 }
+
+
+getDb()
+// .then(console.log(getDb()))
 
 // main().catch(console.error);
 module.exports = { 
