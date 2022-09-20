@@ -3,13 +3,13 @@ const routes = require('express').Router();
 
 const contactsController = require('../controllers/contacts');
 
-routes.get('/', (req, res)=>{
-    res.send('holaasdasd')
-})
+// routes.get('/', (req, res)=>{
+//     res.send('holaasdasd')
+// })
 
-// routes.get('/', contactsController.getAll);
+routes.get('/', contactsController.getAll);
 
-// routes.get('/:id', contactsController.getSingle);
+routes.get('/:id', contactsController.getSingle);
 
 module.exports = routes;
 

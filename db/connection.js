@@ -16,16 +16,19 @@ async function dbConnect() {
        //Connect to our cluster. Next line returns a promise. We use await to stop further excecution until this is completed
         await client.connect()
         db=client;
-        console.log(`connected!${db.db().collection('contacts')}`)
+        // let resul = db.db().collection('contacts').find({});
+        // let resu = resul.toArray();
+        // let result = JSON.stringify(resu);
+        // console.log(`connected!${result}`)
         // await listDocuments(client); 
     } catch (e) {
         console.error(e);
     }
     
     //Close connection
-    finally {
-        await client.close();
-    }
+    // finally {
+    //     await client.close();
+    // }
 
 }
 
@@ -45,14 +48,14 @@ async function listDatabases(client){
 };
 
 async function listDocuments(client){
-    databaseCSE341 = await client.db().collection('contacts');
+    databaseCSE341 = await client.db().collection('contacts').find().toArray();
 
     console.log("Documents:");
-    console.log(databaseCSE341);    
+    console.log(JSON.stringify(databaseCSE341));    
 }
 
 
-getDb()
+// getDb()
 // .then(console.log(getDb()))
 
 // main().catch(console.error);
