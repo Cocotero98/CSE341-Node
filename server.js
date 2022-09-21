@@ -13,3 +13,4 @@ app.listen(port, () => {
 })
 
 // connection.dbConnect().catch(console.error);
+process.on('warning', e => console.warn(e.stack));

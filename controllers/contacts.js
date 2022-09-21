@@ -8,7 +8,7 @@ const getAll = async (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
     console.log(lists)
-  });
+  }).catch((e)=>{console.error(e)});
 };
 
 const getSingle = async (req, res, next) => {
@@ -21,7 +21,7 @@ const getSingle = async (req, res, next) => {
     result.toArray().then((lists) => {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists[0]);
-    });
+    }).catch((e)=>{console.error(e)});
   };
 
   module.exports = { getAll, getSingle };
