@@ -12,19 +12,22 @@ function dbConnect() {
     const client = new MongoClient(uri);
 
     //Wrap our calls to functions that interact with the database in a try/catch statement so that we handle any unexpected errors.
-    try{
+    
        //Connect to our cluster. Next line returns a promise. We use await to stop further excecution until this is completed
         client.connect()
-        .then(db=client);
+        .then(db=client)
         
         // let resul = db.db().collection('contacts').find({});
         // let resu = resul.toArray();
         // let result = JSON.stringify(resu);
         // console.log(`connected!${result}`)
         // await listDocuments(client); 
-    } catch (e) {
-        console.error(e);
-    }
+        .catch((err) => {
+            callback(err);
+          });
+        // } catch (e) {
+    //     console.error(e);
+    // }
     
     //Close connection
     // finally {
