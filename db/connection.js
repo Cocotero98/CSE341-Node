@@ -33,8 +33,8 @@ function dbConnect() {
 
 }
 
-async function getDb () {
-    await dbConnect()
+function getDb () {
+    dbConnect()
     if (!db) {
       throw Error('Db not initialized');
     }
