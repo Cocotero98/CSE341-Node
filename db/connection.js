@@ -6,7 +6,7 @@ let db;
 function dbConnect() {
     //Cluster0 connection string
 	// const uri = "mongodb+srv://agustin98:<password>@cluster0.1vqmd5v.mongodb.net/?retryWrites=true&w=majority;"
-    const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.1vqmd5v.mongodb.net/?retryWrites=true&w=majority`;
+    const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.1vqmd5v.mongodb.net/?retryWrites=true&w=majority&authSource=admin`;
 
     //Create new client with connection string
     const client = new MongoClient(uri);
