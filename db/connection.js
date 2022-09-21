@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 let db;
 
-async function dbConnect() {
+function dbConnect() {
     //Cluster0 connection string
 	// const uri = "mongodb+srv://agustin98:<password>@cluster0.1vqmd5v.mongodb.net/?retryWrites=true&w=majority;"
     const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.1vqmd5v.mongodb.net/?retryWrites=true&w=majority`;
@@ -14,8 +14,9 @@ async function dbConnect() {
     //Wrap our calls to functions that interact with the database in a try/catch statement so that we handle any unexpected errors.
     try{
        //Connect to our cluster. Next line returns a promise. We use await to stop further excecution until this is completed
-        await client.connect()
-        db=client;
+        client.connect()
+        .then(db=client);
+        
         // let resul = db.db().collection('contacts').find({});
         // let resu = resul.toArray();
         // let result = JSON.stringify(resu);
@@ -40,19 +41,19 @@ async function getDb () {
     return db;
   };
 
-async function listDatabases(client){
-    databasesList = await client.db().admin().listDatabases();
+// async function listDatabases(client){
+//     databasesList = await client.db().admin().listDatabases();
  
-    console.log("Databases:");
-    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-};
+//     console.log("Databases:");
+//     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+// };
 
-async function listDocuments(client){
-    databaseCSE341 = await client.db().collection('contacts').find().toArray();
+// async function listDocuments(client){
+//     databaseCSE341 = await client.db().collection('contacts').find().toArray();
 
-    console.log("Documents:");
-    console.log(JSON.stringify(databaseCSE341));    
-}
+//     console.log("Documents:");
+//     console.log(JSON.stringify(databaseCSE341));    
+// }
 
 
 // getDb()

@@ -12,4 +12,4 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
 
-connection.dbConnect().catch(console.error);
+// connection.dbConnect().catch(console.error);
