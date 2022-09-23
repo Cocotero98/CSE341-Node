@@ -23,7 +23,7 @@ function dbConnect() {
         // console.log(`connected!${result}`)
         // await listDocuments(client); 
         .catch((err) => {
-            callback(err);
+            throw err;
           });
         // } catch (e) {
     //     console.error(e);
