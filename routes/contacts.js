@@ -1,5 +1,5 @@
 const routes = require('express').Router();
-
+// const bodyParser = require('body-parser');
 
 const contactsController = require('../controllers/contacts');
 
@@ -10,6 +10,12 @@ const contactsController = require('../controllers/contacts');
 routes.get('/', contactsController.getAll);
 
 routes.get('/:id', contactsController.getSingle);
+
+routes.post('/add', contactsController.addContact);
+
+routes.put('/update&:id', contactsController.updateContact);
+
+routes.delete('/:id', contactsController.deleteContact);
 
 module.exports = routes;
 

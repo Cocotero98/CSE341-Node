@@ -2,6 +2,25 @@ GET http://localhost:3000/contacts/632486ab350a859cc62ad45d
 ###
 GET http://localhost:3000/contacts/
 ###
+POST http://localhost:3000/contacts/add HTTP/1.1 
+content-type: application/json
+
+{
+"firstName":"Thomas", "lastName":"Everett", "email":"tEver@test.com", "favoriteColor":"Yellow", "birthday":"02/14/1998"
+}
+###
+PUT http://localhost:3000/contacts/update&632c6862d5bb53f4aeaeb797 HTTP/1.1
+content-type: application/json
+
+{
+    "firstName":"Thomas", "lastName":"Everett", "email":"tEver@test.com", "favoriteColor":"Green", "birthday":"02/14/1998"
+}
+###
+DELETE http://localhost:3000/contacts/632c680cd5bb53f4aeaeb796 HTTP/1.1
+
+
+
+###------RENDER-------###
 GET https://aguilar341.onrender.com/contacts
 ###
 GET https://aguilar341.onrender.com/contacts/632486ab350a859cc62ad45d
