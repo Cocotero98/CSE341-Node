@@ -13,12 +13,11 @@ routes.get('/:id', contactsController.getSingle);
 
 routes.post('/add', contactsController.addContact);
 
-routes.put('/update&:id', contactsController.updateContact);
+routes.put('/update/:id', contactsController.updateContact);
 
 routes.delete('/:id', contactsController.deleteContact);
 
 module.exports = routes;
-
 
 //---------NOTAS
 //No aparece actualizado en render

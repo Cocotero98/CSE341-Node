@@ -6,17 +6,17 @@ POST http://localhost:3000/contacts/add HTTP/1.1
 content-type: application/json
 
 {
-"firstName":"Thomas", "lastName":"Everett", "email":"tEver@test.com", "favoriteColor":"Yellow", "birthday":"02/14/1998"
+"firstName":"Peter", "lastName":"Everett", "email":"tEver@test.com", "favoriteColor":"Yellow", "birthday":"02/14/1998"
 }
 ###
-PUT http://localhost:3000/contacts/update&632c6862d5bb53f4aeaeb797 HTTP/1.1
+PUT http://localhost:3000/contacts/update/632c6862d5bb53f4aeaeb797 HTTP/1.1
 content-type: application/json
 
 {
-    "firstName":"Thomas", "lastName":"Everett", "email":"tEver@test.com", "favoriteColor":"Green", "birthday":"02/14/1998"
+    "firstName":"Peter", "lastName":"Everett", "email":"tEver@test.com", "favoriteColor":"Green", "birthday":"02/14/1998"
 }
 ###
-DELETE http://localhost:3000/contacts/632c680cd5bb53f4aeaeb796 HTTP/1.1
+DELETE http://localhost:3000/contacts/632d18f2021515a70cc1e32f HTTP/1.1
 
 
 
