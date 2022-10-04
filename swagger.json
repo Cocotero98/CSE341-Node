@@ -5,11 +5,9 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "aguilar341.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/api-docs": {
       "get": {
@@ -21,9 +19,7 @@
     "/contacts/": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [],
         "responses": {
           "200": {
@@ -35,9 +31,7 @@
     "/contacts/{id}": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",

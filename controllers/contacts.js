@@ -3,42 +3,33 @@ const ObjectId = require('mongodb').ObjectId;
 // const bodyParser = require('body-parser');
 
 const getAll = async (req, res) => {
-  try {
-    const db = await mongodb.getDb();
-    // const db = await mongodb.getDb()
-    const result = db.db('CSE341').collection('contacts').find();
-    result
-      .toArray()
-      .then((lists) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(lists);
-        console.log(lists);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  } catch (e) {
-    console.error(e);
-  }
+  const db = await mongodb.getDb();
+  const result = db.db('CSE341').collection('contacts').find();
+  result
+    .toArray()
+    .then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+      console.log(lists);
+    })
+    .catch((e) => {
+      res.status(400).json({ message: e });
+    });
 };
 
 const getSingle = async (req, res) => {
   const userId = new ObjectId(req.params.id);
-  try {
-    const db = await mongodb.getDb();
-    const result = db.db('CSE341').collection('contacts').find({ _id: userId });
-    result
-      .toArray()
-      .then((lists) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(lists[0]);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  } catch (e) {
-    console.error(e);
-  }
+  const db = await mongodb.getDb();
+  const result = db.db('CSE341').collection('contacts').find({ _id: userId });
+  result
+    .toArray()
+    .then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists[0]);
+    })
+    .catch((e) => {
+      res.status(400).json({ message: e });
+    });
 };
 
 const addContact = async (req, res) => {
@@ -55,9 +46,9 @@ const addContact = async (req, res) => {
     .collection('contacts')
     .insertOne(contact, (error, result) => {
       if (error) {
-        return res.status(500).send(error);
+        return res.status(500).json(res.error || 'Some error occurred while creating the contact.');
       }
-      res.send(result.result);
+      res.status(201).json(result);
     });
 };
 
@@ -80,11 +71,16 @@ const updateContact = async (req, res) => {
       },
       (error) => {
         if (error) {
-          return res.status(500).send(error);
+          return res
+            .status(500)
+            .json(res.error || 'Some error occurred while updating the contact.');
+        } else {
+          res
+            .status(204)
+            .send(
+              `${contact.firstName} ${contact.lastName} contact information successfully updated.`
+            );
         }
-        res.send(
-          `${contact.firstName} ${contact.lastName} contact information successfully updated.`
-        );
       }
     );
 };
@@ -92,14 +88,12 @@ const updateContact = async (req, res) => {
 const deleteContact = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   const db = await mongodb.getDb();
-  db.db('CSE341')
-    .collection('contacts')
-    .deleteOne({ _id: userId }, (error) => {
-      if (error) {
-        throw error;
-      }
-      res.send(`One contact deleted.`);
-    });
+  let deleteResult = await db.db('CSE341').collection('contacts').deleteOne({ _id: userId });
+  if (deleteResult.deletedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(deleteResult.error || 'Some error occurred while deleting the contact.');
+  }
 };
 
 module.exports = { getAll, getSingle, addContact, updateContact, deleteContact };
